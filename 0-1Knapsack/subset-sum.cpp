@@ -9,9 +9,15 @@ public:
         //checking if it is already present there in dp array
         if(dp[i][currSum] != -1) { return dp[i][currSum]; }
         
+        //recursive call
+        if(arr[i] > targetSum) {
+            return dp[i][currSum] = helper(arr, i+1, currSum, targetSum);
+        }
         //storing in dp array + recursive call
-        dp[i][currSum] = (helper(arr, i+1, currSum+arr[i], targetSum) || helper(arr, i+1, currSum, targetSum));
-        return dp[i][currSum];
+        else { 
+            dp[i][currSum] = (helper(arr, i+1, currSum+arr[i], targetSum) || helper(arr, i+1, currSum, targetSum));
+            return dp[i][currSum];
+        }
     }
     
     bool isSubsetSum(vector<int>arr, int sum){
